@@ -8,16 +8,14 @@ package se.stade.colligo.filters
 		public function HasPropertyFilter(name:String)
 		{
             super(this);
-			property = Reflect.properties.named(name);
+            propertyExists = Reflect.first.property.named(name);
 		}
 		
-		private var property:Reflection;
+		private var propertyExists:Reflection;
 		
 		public function validates(item:*):Boolean
 		{
-			return Reflect.properties
-                          .on(item)
-                          .length > 0;
+			return propertyExists.on(item);
 		}
 	}
 }

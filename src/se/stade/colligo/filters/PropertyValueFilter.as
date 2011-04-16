@@ -10,19 +10,16 @@ package se.stade.colligo.filters
 		{
             super(this);
 			this.value = value;
-			namedProperty = Reflect.properties.named(name).thatAreWritable;
+			findProperty = Reflect.first.property.named(name).withReadAccess;
 		}
 		
-		private var namedProperty:Reflection;
+		private var findProperty:Reflection;
 		private var value:*;
 		
 		public function validates(item:*):Boolean
 		{
-			var property:Property = Reflect.on(item)
-                                           .findFirst(namedProperty) as Property;
-            
-			return property
-                   && property.value === value;
+			var property:Property = findProperty.on(item);
+			return property && property.value === value;
 		}
 	}
 }

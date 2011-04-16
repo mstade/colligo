@@ -8,17 +8,14 @@ package se.stade.colligo.filters
 		public function HasGetterFilter(name:String)
 		{
             super(this);
-			getter = Reflect.properties.named(name).thatAreReadable;
+			getterExists = Reflect.all.properties.named(name).withReadAccess;
 		}
 		
-		private var getter:Reflection;
+		private var getterExists:Reflection;
 		
 		public function validates(item:*):Boolean
 		{
-			return Reflect.properties
-                          .thatAreReadable
-                          .on(item)
-                          .length > 0;
+			return getterExists.on(item);
 		}
 	}
 }

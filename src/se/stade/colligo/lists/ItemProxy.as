@@ -60,9 +60,9 @@ package se.stade.colligo.lists
 		 */
 		public function get(property:String):*
 		{
-			var properties:Array = Reflect.properties
+			var properties:Array = Reflect.all.properties
                                           .named(property)
-                                          .thatAreReadable
+                                          .withReadAccess
                                           .on(this);
 			
 			if (properties.length == 0)

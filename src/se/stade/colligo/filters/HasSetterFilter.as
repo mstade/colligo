@@ -8,17 +8,14 @@ package se.stade.colligo.filters
 		public function HasSetterFilter(name:String)
 		{
             super(this);
-			setter = Reflect.properties.named(name).thatAreWritable;
+			setterExists = Reflect.first.property.named(name).withWriteAccess;
 		}
 		
-		private var setter:Reflection;
+		private var setterExists:Reflection;
 		
 		public function validates(item:*):Boolean
 		{
-			return Reflect.properties
-                          .thatAreWritable
-                          .on(item)
-                          .length > 0;
+			return setterExists.on(item);
 		}
 	}
 }
