@@ -9,11 +9,11 @@ package se.stade.colligo.iterators
 		public function LinearIterator(... iterable)
 		{
 			this.iterable = toEnumerable(iterable);
-			rewind()
+			rewind();
 		}
 		
 		protected var iterable:*;
-		protected var currentIndex:int;
+		protected var currentIndex:int; 
         
         public function get current():*
         {

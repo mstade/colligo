@@ -1,10 +1,10 @@
 package se.stade.colligo.lists
 {
 	import se.stade.colligo.Processable;
-	import se.stade.colligo.filters.HasMethodFilter;
-	import se.stade.colligo.filters.HasSetterFilter;
 	import se.stade.colligo.operators.toEnumerable;
 	import se.stade.daffodil.Reflect;
+	import se.stade.daffodil.methods.Method;
+	import se.stade.daffodil.properties.Property;
 
 	/**
 	 * 
@@ -23,22 +23,25 @@ package se.stade.colligo.lists
 		/**
 		 * @inheritDoc
 		 */
-		public function call(method:String, ... parameters):*
+		public function call(methodName:String, ... parameters):*
 		{
-			var items:Array = new HasMethodFilter(method).applyTo(list);
-			if (items.length == 0)
-				return undefined;
-			
-			var item:Object = items.shift();
-			var commonResult:* = item[method].apply(item, parameters);
-			
-			for each (item in items)
-			{
-				var result:* = item[method].apply(item, parameters);
-				
-				if (result !== commonResult)
-					commonResult = undefined;
-			}
+            var methods:Array = Reflect.all.methods
+                                       .named(methodName)
+                                       .on(list);
+            
+            var commonResult:* = undefined;
+            
+            if (methods.length)
+            {
+                
+                methods.slice(1);
+                
+                for each (var method:Method in methods)
+                {
+                    var result:* = method.invoke(parameters);
+                    commonResult = (result === commonResult) ? result : undefined;
+                }
+            }
 			
 			return commonResult;
 		}
@@ -53,46 +56,52 @@ package se.stade.colligo.lists
 				method.apply(item, parameters.concat([item]));
 			}
 		}
-
 		
 		/**
 		 * @inheritDoc
 		 */
-		public function get(property:String):*
+		public function get(propertyName:String):*
 		{
 			var properties:Array = Reflect.all.properties
-                                          .named(property)
+                                          .named(propertyName)
                                           .withReadAccess
-                                          .on(this);
+                                          .on(list);
 			
-			if (properties.length == 0)
-				return undefined;
+            var value:* = undefined;
+            
+			if (properties.length)
+            {
+    			value = properties[0].value;
+            
+                properties.slice(1);
+    			
+                for each (var property:Property in properties)
+                {
+                    if (property.value === value)
+                        continue;
+    				
+    				return undefined;
+    			}
+            }
 			
-			var commonValue:* = properties[0].value;
-			
-			for (var i:int = 1; i < properties.length; i++)
-			{
-				if (properties[i].value === commonValue)
-					continue;
-				
-				return undefined;
-			}
-			
-			return commonValue;
+			return value;
 		}
 		
 		/**
 		 * @inheritDoc
 		 */
-		public function set(properties:Object):void
+		public function set(values:Object):void
 		{
-			for (var name:String in properties)
+			for (var propertyName:String in values)
 			{
-				var items:Array = new HasSetterFilter(name).applyTo(list);
+                var properties:Array = Reflect.all.properties
+                                              .named(propertyName)
+                                              .withWriteAccess
+                                              .on(list);
 				
-				for each (var item:* in items)
+				for each (var property:Property in properties)
 				{
-					item[name] = properties[name];
+                    property.value = values[propertyName];
 				}
 			}
 		}

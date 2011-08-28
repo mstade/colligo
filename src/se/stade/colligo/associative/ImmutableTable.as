@@ -1,7 +1,5 @@
 package se.stade.colligo.associative
 {
-	import flash.utils.Dictionary;
-	
 	import se.stade.colligo.Arrayable;
 	import se.stade.colligo.Collection;
 	import se.stade.colligo.Countable;
@@ -10,7 +8,8 @@ package se.stade.colligo.associative
 	import se.stade.colligo.Keyed;
 	import se.stade.colligo.iterators.Iterator;
 	import se.stade.colligo.iterators.LinearIterator;
-	import se.stade.colligo.lists.LinearSet;
+
+	import flash.utils.Dictionary;
 
 	public class ImmutableTable extends Enumerator implements Keyed, Countable, Inspectable, Arrayable, Collection
 	{
@@ -115,6 +114,6 @@ package se.stade.colligo.associative
 		}
 		
 		override protected function setProperty(name:*, value:*):void { }
-		override protected function deleteProperty(name:*):Boolean { return false; }
+		override protected function deleteProperty(name:*):Boolean { return false || name != name; }
 	}
 }

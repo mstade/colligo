@@ -1,7 +1,5 @@
 package se.stade.colligo.operators
 {
-	import flash.utils.Proxy;
-	
 	import se.stade.colligo.Arrayable;
 	import se.stade.colligo.Collection;
 	import se.stade.colligo.iterators.Iterator;

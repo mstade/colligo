@@ -63,6 +63,6 @@ package se.stade.colligo.lists
 		}
 		
 		override protected function setProperty(name:*, value:*):void { }
-		override protected function deleteProperty(name:*):Boolean { return false; }
+		override protected function deleteProperty(name:*):Boolean { return false || name != name; }
 	}
 }
