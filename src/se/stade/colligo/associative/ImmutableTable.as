@@ -1,5 +1,7 @@
 package se.stade.colligo.associative
 {
+	import flash.utils.Dictionary;
+	
 	import se.stade.colligo.Arrayable;
 	import se.stade.colligo.Collection;
 	import se.stade.colligo.Countable;
@@ -8,8 +10,6 @@ package se.stade.colligo.associative
 	import se.stade.colligo.Keyed;
 	import se.stade.colligo.iterators.Iterator;
 	import se.stade.colligo.iterators.LinearIterator;
-
-	import flash.utils.Dictionary;
 
 	public class ImmutableTable extends Enumerator implements Keyed, Countable, Inspectable, Arrayable, Collection
 	{
@@ -76,7 +76,7 @@ package se.stade.colligo.associative
 
 		public function get isEmpty():Boolean
 		{
-			return count == 0;
+			return length == 0;
 		}
 
 		protected var pairList:Array;

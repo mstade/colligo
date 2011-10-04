@@ -12,6 +12,6 @@ package se.stade.colligo
 		 * 
 		 * @return  
 		 */
-		function get count():uint;
+		function get length():uint;
 	}
 }

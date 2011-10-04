@@ -52,7 +52,7 @@ package se.stade.colligo.lists
 		 */
 		public function pop():*
 		{
-			if (count == 0)
+			if (length == 0)
 				return null;
 				
 			return list.shift();
@@ -77,7 +77,7 @@ package se.stade.colligo.lists
 		/**
 		 * @inheritDoc
 		 */
-		public function get count():uint
+		public function get length():uint
 		{
 			return list.length;
 		}
@@ -87,7 +87,7 @@ package se.stade.colligo.lists
 		 */
 		public function get isEmpty():Boolean
 		{
-			return count == 0;
+			return length == 0;
 		}
 
 		/**

@@ -44,7 +44,7 @@ package se.stade.colligo.lists
 		
 		public function get isEmpty():Boolean
 		{
-			return count == 0;
+			return length == 0;
 		}
 
 		public function contains(value:*):Boolean

@@ -31,7 +31,7 @@ package se.stade.colligo
 		protected var values:Dictionary;
 		protected var pairs:Vector.<KeyValuePair>;
 		
-		public function get count():uint
+		public function get length():uint
 		{
 			return pairs.length;
 		}
@@ -48,7 +48,7 @@ package se.stade.colligo
 		
 		protected function getNextIndex(currentIndex:int):int
 		{
-			if (currentIndex < count)
+			if (currentIndex < length)
 				return currentIndex + 1;
 			else
 				return 0;

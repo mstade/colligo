@@ -49,7 +49,7 @@ package se.stade.colligo.lists
 		 */
 		public function add(item:*):void
 		{
-			addItemAt(count, item);
+			addItemAt(length, item);
 		}
 		
 		public function addItemAt(index:uint, item:*):void
@@ -57,7 +57,7 @@ package se.stade.colligo.lists
 			if (contains(item))
 				return;
 			
-			if (index == count - 1)
+			if (index == length - 1)
 				this[index] = item;
 			else
 			{
@@ -81,11 +81,11 @@ package se.stade.colligo.lists
 
 		public function removeItemAt(index:uint):void
 		{
-			if (index >= 0 && index < count)
+			if (index >= 0 && index < length)
 			{
 				delete this[index];
 				
-				if (index < count - 1)
+				if (index < length - 1)
 				{
 					var values:Array = toArray();
 					initialize(KeyValuePair.fromList(values));
@@ -122,7 +122,7 @@ package se.stade.colligo.lists
 		 */
 		public function get isEmpty():Boolean
 		{
-			return count == 0;
+			return length == 0;
 		}
 		
 		/**
@@ -145,7 +145,7 @@ package se.stade.colligo.lists
 		 */
 		public function getItemAt(index:int):*
 		{
-			if (index > 0 && index < count)
+			if (index > 0 && index < length)
 				return pairs[index].value;
 			
 			return undefined;
